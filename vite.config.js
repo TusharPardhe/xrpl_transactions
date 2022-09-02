@@ -20,8 +20,5 @@ export default defineConfig({
         NodeModulesPolyfillPlugin(),
       ],
     },
-  },
-  build: {
-    outDir: 'docs'
   }
 })
