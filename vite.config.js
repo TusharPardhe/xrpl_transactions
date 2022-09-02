@@ -9,16 +9,19 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     esbuildOptions: {
-        define: {
-            global: "globalThis",
-        },
-        plugins: [
-            NodeGlobalsPolyfillPlugin({
-                process: true,
-                buffer: true,
-            }),
-            NodeModulesPolyfillPlugin(),
-        ],
+      define: {
+        global: "globalThis",
+      },
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          process: true,
+          buffer: true,
+        }),
+        NodeModulesPolyfillPlugin(),
+      ],
     },
-},
+  },
+  build: {
+    outDir: 'docs'
+  }
 })
