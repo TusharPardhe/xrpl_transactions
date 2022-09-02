@@ -131,7 +131,7 @@ function App() {
         </div>
       </div>
       <div className="btn">
-        <div><button onClick={onBtnClick} disabled={loading}>Fetch</button></div>
+        {address.length > 0 && (<div><button onClick={onBtnClick} disabled={loading}>Fetch</button></div>)}
         {!loading && address.length > 0 && transactions.length > 0 && (
           <JsonToExcel
             title="Download Excel"
