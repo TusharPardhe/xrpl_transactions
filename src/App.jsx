@@ -65,8 +65,9 @@ function App() {
         response.transactions.forEach(tx => {
           const txDate = (tx.tx.date + 946684800) * 1000;
           const payment = tx.tx.TransactionType === "Payment";
+          const isToAccount = tx.tx.Destination === address;
 
-          if (txDate >= lastDate && payment) {
+          if (txDate >= lastDate && payment && isToAccount) {
             let amount = {};
 
             if (typeof tx.tx.Amount === "string") {
@@ -80,14 +81,16 @@ function App() {
             delete tx.tx.date;
 
             data.push({
-              ...amount, date: new Date(txDate).toLocaleString(undefined, {
+              ...amount,
+              TransactionResult: tx.meta.TransactionResult === "tesSUCCESS" ? "success" : "failed",
+              date: new Date(txDate).toLocaleString(undefined, {
                 year: 'numeric',
                 month: 'numeric',
                 day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
                 second: 'numeric'
-              }), ...tx.tx, TransactionResult: tx.meta.TransactionResult
+              }), ...tx.tx
             })
           } else {
             exitTxs = true;
@@ -144,7 +147,7 @@ function App() {
           />
         )}
       </div>
-      {loading && <Loader/>}
+      {loading && <Loader />}
     </div>
   );
 }
