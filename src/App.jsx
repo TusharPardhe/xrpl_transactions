@@ -104,6 +104,7 @@ function App() {
     } catch (error) {
       console.log(error);
       toast(error.error_message);
+      setLoading(false);
     }
   };
 
@@ -141,8 +142,15 @@ function App() {
           />
         )}
       </div>
+      {loading && <Loader/>}
     </div>
   );
 }
 
 export default App;
+
+const Loader = () => {
+  return (
+    <div class="loading">Loading&#8230;</div>
+  )
+}

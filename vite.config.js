@@ -26,6 +26,9 @@ export default defineConfig({
     output: { entryFileNames: "[name].js" },
     plugins: [nodePolyfills()],
   },
+  define: {
+    'process.env': {}
+  },
   resolve: {
     extensions: ["*", ".js", ".jsx"],
     alias: [
@@ -34,9 +37,7 @@ export default defineConfig({
       { find: "path", replacement: "rollup-plugin-node-polyfills/polyfills/path" },
     ],
   },
-  esbuild: {
-    loader: "jsx",
-    include: /src\/.*\.jsx?$/,
-    exclude: [],
+  build: {
+    minify: false,
   },
 })
