@@ -67,7 +67,7 @@ function App() {
           const payment = tx.tx.TransactionType === "Payment";
           const isToAccount = tx.tx.Destination === address;
 
-          if (txDate >= lastDate && payment && isToAccount) {
+          if (txDate >= lastDate && payment && isToAccount && tx.meta.TransactionResult === "tesSUCCESS") {
             let amount = {};
 
             if (typeof tx.tx.Amount === "string") {
@@ -82,7 +82,6 @@ function App() {
 
             data.push({
               ...amount,
-              TransactionResult: tx.meta.TransactionResult === "tesSUCCESS" ? "success" : "failed",
               date: new Date(txDate).toLocaleString(undefined, {
                 year: 'numeric',
                 month: 'numeric',
