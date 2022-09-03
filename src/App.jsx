@@ -27,6 +27,8 @@ function App() {
 
   const onBtnClick = async () => {
     setLoading(true);
+    setTransactions([]);
+
     let exitTxs = false;
     let data = [];
 
